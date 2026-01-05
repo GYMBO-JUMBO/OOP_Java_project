@@ -24,4 +24,23 @@ public class Room {
             this.pricePerNight = pricePerNight;
         }
     }
+    @Override
+    public String toString() {
+        return "Room[" + roomType + ", $" + pricePerNight + "]";
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Double.compare(room.pricePerNight, pricePerNight) == 0 && 
+               roomType.equals(room.roomType);
+    }
+    @Override
+    public int hashCode() {
+        int result = roomType.hashCode();
+        long temp = Double.doubleToLongBits(pricePerNight);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
